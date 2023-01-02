@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -20,12 +23,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "eslint --ignore-path .gitignore .",
+    "prettier": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css}\"",
+    "eject": "react-scripts eject",
+    "coverage": "yarn run test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts, tsx}' --collectCoverageFrom='!src/components/**/*.{types, stories, constants, test, spec}.{ts, tsx}'",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:jest-dom/recommended",
+      "eslint-config-prettier"
     ]
   },
   "browserslist": {
@@ -39,5 +48,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "function": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    }
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest-dom": "^4.0.3",
+    "msw": "^0.49.2",
+    "prettier": "2.8.1",
+    "husky": "^8.0.0"
   }
 }
